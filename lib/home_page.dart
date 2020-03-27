@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
                     Padding(
                       padding: EdgeInsets.only(top: 10),
                       child: Text("Informe seus Dados!", style: TextStyle(
-                          color: Colors.blue,
+                          color: Colors.orange,
                           fontSize: 25
                       ),),
                     )
