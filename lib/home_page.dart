@@ -6,6 +6,31 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  TextEditingController weightController = TextEditingController();
+  TextEditingController heightController = TextEditingController();
+
+  String _infoText = "Informe seus dados!";
+
+
+  void _resetFields(){
+    weightController.text = "";
+    heightController.text = "";
+    _infoText = "Informe seus Dados!";
+  }
+
+  void calculate(){
+    double weight = double.parse(weightController.text);
+    double height = double.parse(weightController.text)/100;
+    double imc = weight/(height*height);
+
+    if(imc < 18.6){
+      _infoText = "Abaixo do Peso"
+    }
+
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +43,7 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             icon: Icon(Icons.refresh),
             color: Colors.white,
-            onPressed: () {},
+            onPressed: _resetFields,
           ),
         ],
       ),
@@ -40,10 +65,24 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   children: <Widget>[
                     TextFormField(
-                      decoration: InputDecoration(labelText: ("Peso (Kg)")),
+                      controller: weightController,
+                      decoration: InputDecoration(
+                        labelText: ("Peso (Kg)"),
+                        labelStyle: TextStyle(
+                          color: Colors.green,
+                          fontSize: 25
+                        )
+                      ),
                     ),
                     TextFormField(
-                      decoration: InputDecoration(labelText: ("Altura (Cm)")),
+                      controller: heightController,
+                      decoration: InputDecoration(
+                          labelText: ("Altura (Cm)"),
+                          labelStyle: TextStyle(
+                              color: Colors.green,
+                            fontSize: 25
+                          )
+                      ),
                       keyboardType: TextInputType.number,
                     ),
                     SizedBox(
@@ -53,6 +92,7 @@ class _HomePageState extends State<HomePage> {
                       width: MediaQuery.of(context).size.width,
                       height: 50,
                       child: RaisedButton(
+                        highlightColor: Colors.lightGreen,
                         elevation: 10,
                         child: Text("Calcular", style: TextStyle(
                             fontSize: 22,
@@ -65,9 +105,9 @@ class _HomePageState extends State<HomePage> {
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 10),
-                      child: Text("Informe seus Dados!", style: TextStyle(
-                          color: Colors.orange,
-                          fontSize: 30
+                      child: Text(_infoText, style: TextStyle(
+                          color: Colors.green,
+                          fontSize: 25
                       ),),
                     )
                   ],
