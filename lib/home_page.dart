@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
     double imc = weight/(height*height);
 
     if(imc < 18.6){
-      _infoText = "Abaixo do Peso"
+      _infoText = "Abaixo do Peso";
     }
 
   }
